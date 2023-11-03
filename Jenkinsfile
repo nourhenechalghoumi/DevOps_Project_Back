@@ -10,10 +10,10 @@ pipeline {
     }
 
     stages {
-        stage('Checkout GIT') {
+        stage('Checkout GIT (Backend)') {
             steps {
-                echo "Getting Project from Git"
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Back.git']]])
+                echo "Getting Project from Git (Backend)"
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Back.git']])
             }
         }
 
@@ -30,15 +30,15 @@ pipeline {
                         sh 'mvn clean install '
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
-                        error("Build failed: ${e.message}")
+                        error("Build failed (Backend): ${e.message}")
                     }
                 }
             }
             post {
                 success {
                     script {
-                        def subject = "Notification success"
-                        def body = "BUILD DONE "
+                        def subject = "Notification success (Backend)"
+                        def body = "BUILD DONE (Backend)"
                         def to = 'test.devops697@gmail.com'
 
                         mail(
@@ -50,7 +50,7 @@ pipeline {
                 }
                 failure {
                     script {
-                        def subject = "Build Failure - ${currentBuild.fullDisplayName}"
+                        def subject = "Build Failure - ${currentBuild.fullDisplayName} (Backend)"
                         def body = "The build has failed in the Jenkins pipeline. Please investigate and take appropriate action."
                         def to = 'test.devops697@gmail.com'
 
@@ -64,16 +64,20 @@ pipeline {
             }
         }
 
-       // stage('Build Frontend') {
-           // steps {
-              //  dir('DevOps_Project_Front') {
-                   // script {
-                    //    sh 'npm install'
-                     //   sh 'ng build '
-                 //   }
-              //  }
-           // }
-       // }
+        stage('Checkout GIT (Frontend)') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Front.git']])
+            }
+        }
+
+        stage('Build Frontend') {
+            steps {
+                script {
+                    sh 'npm install'
+                    sh 'ng build '
+                }
+            }
+        }
 
         stage('SonarQube analysis') {
             steps {
@@ -101,24 +105,24 @@ pipeline {
                 }
             }
         }
-    
-        // stage('Build Docker Image (Frontnd)') {
-        //     steps {
-        //         def imageName = "nourhenechalghoumi/devops_project"
-        //         script {
-        //             sh "docker build -t $imageName ."
-        //             sh "docker push $imageName"
-        //         }
-        //     }
-        // }
 
-        // stage('Deploy Front/Back/DB') {
-        //     steps {
-        //         script {
-        //             sh 'docker-compose -f docker-compose.yml up -d'
-        //         }
-        //     }
-        // }
+        stage('Build Docker Image (Frontnd)') {
+            steps {
+                def imageName = "nourhenechalghoumi/devops_project_frontend"
+                script {
+                    sh "docker build -t $imageName ."
+                    sh "docker push $imageName"
+                }
+            }
+        }
+
+        stage('Deploy Front/Back/DB') {
+            steps {
+                script {
+                    sh 'docker-compose -f docker-compose.yml up -d'
+                }
+            }
+        }
     }
 }
 
