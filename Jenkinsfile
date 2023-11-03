@@ -56,9 +56,9 @@ pipeline {
             steps {
                 script {
                     def imageName = "nourhenechalghoumi/devops_project"
-            sh 'DOCKER_BUILDKIT=1 docker build -t $imageName .'
-            sh "docker login -u $DOCKERHUB_CREDENTIALS_USR -p \$DOCKERHUB_CREDENTIALS_PSW"
-            sh "docker push $imageName"
+                    sh "docker build -t $imageName ."
+                    sh "docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW"
+                    sh "docker push $imageName"
                 }
             }
         }
