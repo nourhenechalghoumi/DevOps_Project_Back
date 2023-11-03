@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: tn.esprit.devops_project.services.StockServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 2, Errors: 1, Skipped: 0, Time elapsed: 38.016 s <<< FAILURE! - in tn.esprit.devops_project.services.StockServiceImplTest
+addStock  Time elapsed: 0.666 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <2>
+	at tn.esprit.devops_project.services.StockServiceImplTest.addStock(StockServiceImplTest.java:43)
+
+retrieveAllStock  Time elapsed: 0.149 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <0> but was: <1>
+	at tn.esprit.devops_project.services.StockServiceImplTest.retrieveAllStock(StockServiceImplTest.java:58)
+
+retrieveStock  Time elapsed: 0.121 s  <<< ERROR!
+java.lang.NullPointerException: Stock not found
+	at tn.esprit.devops_project.services.StockServiceImplTest.retrieveStock(StockServiceImplTest.java:50)
+
