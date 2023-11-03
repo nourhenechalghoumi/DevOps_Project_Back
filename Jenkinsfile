@@ -42,15 +42,15 @@ pipeline {
             }
         }
 
-        stage('Build Frontend') {
-            steps {
-                script {
-                    echo "Getting Project from Git (Frontend)"
-                    sh 'npm install'
-                    sh 'ng build'
-                }
-            }
-        }
+      //  stage('Build Frontend') {
+        //    steps {
+          //      script {
+            //        echo "Getting Project from Git (Frontend)"
+              //      sh 'npm install'
+                //    sh 'ng build'
+               // }
+           // }
+       // }
      
 
         stage('SonarQube analysis') {
@@ -81,23 +81,23 @@ pipeline {
         }
         
 
-        stage('Build Docker Image (Frontend)') {
-            steps {
-                script {
-                    def imageName = "nourhenechalghoumi/devops_project_frontend"
-                    sh "docker build -t $imageName ."
-                    sh "docker push $imageName"
-                }
-            }
-        }
-        stage('Debug') {
-    	    steps {
-        	script {
-            	    echo "Current PATH: ${env.PATH}"
-                    sh "npm list -g --depth=0"
-        	}
-    	    }
-	}
+        //stage('Build Docker Image (Frontend)') {
+          //  steps {
+            //    script {
+              //      def imageName = "nourhenechalghoumi/devops_project_frontend"
+                //    sh "docker build -t $imageName ."
+                  //  sh "docker push $imageName"
+               // }
+           // }
+       // }
+       // stage('Debug') {
+    	 //   steps {
+        //	script {
+          //  	    echo "Current PATH: ${env.PATH}"
+            //        sh "npm list -g --depth=0"
+        //	}
+    	  //  }
+//	}
 
 
         stage('Deploy Front/Back/DB') {
