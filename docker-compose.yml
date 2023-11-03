@@ -22,16 +22,3 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
     restart: on-failure
-
-  frontend:
-    image: nourhenechalghoumi/devops_project_front
-    ports:
-      - "80:80"
-    depends_on:
-      - backend
-
-  SonarQ:
-    image: sonarqube:8.9.7-community
-  
-  Nex:
-    image: sonatype/nexus3
