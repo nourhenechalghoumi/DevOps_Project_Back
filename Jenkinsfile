@@ -13,7 +13,7 @@ pipeline {
         stage('Checkout GIT (Backend)') {
             steps {
                 echo "Getting Project from Git (Backend)"
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Back.git']])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [userRemoteConfig(url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Back.git')]])
             }
         }
 
@@ -66,7 +66,7 @@ pipeline {
 
         stage('Checkout GIT (Frontend)') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: 'main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Front.git']])
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [userRemoteConfig(url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Front.git')]])
             }
         }
 
@@ -106,7 +106,7 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image (Frontnd)') {
+        stage('Build Docker Image (Frontend)') {
             steps {
                 def imageName = "nourhenechalghoumi/devops_project_frontend"
                 script {
