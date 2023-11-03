@@ -78,8 +78,8 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 script {
-                    withSonarQubeEnv(installationName: 'Devops') {
-                        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.login=squ_3ea4356b9bfaf618b8528e69537987a92e1119a6'
+                    withSonarQubeEnv(installationName: 'DevopsProject') {
+                        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.login=squ_99f5d2d701628c8aca0a7fcd807ff448b8387001'
                     }
                 }
             }
