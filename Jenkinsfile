@@ -70,14 +70,16 @@ pipeline {
             }
         }
 
-        stage('Build Frontend') {
-            steps {
-                script {
-                    sh 'npm install'
-                    sh 'ng build '
-                }
+      stage('Build Frontend') {
+    steps {
+        script {
+            dir('/home/devops/.git/DevOps_Project_Front') {
+                sh 'npm install'
+                sh 'ng build'
             }
         }
+    }
+}
 
         stage('SonarQube analysis') {
             steps {
