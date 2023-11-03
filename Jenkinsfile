@@ -13,7 +13,7 @@ pipeline {
         stage('Checkout GIT (Backend)') {
             steps {
                 echo "Getting Project from Git (Backend)"
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [userRemoteConfig(url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Back.git')]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Back.git']]])
             }
         }
 
@@ -23,7 +23,7 @@ pipeline {
             }
         }
 
-           stage('Build and Test Backend') {
+        stage('Build and Test Backend') {
             steps {
                 script {
                     try {
@@ -64,10 +64,9 @@ pipeline {
             }
         }
 
-
         stage('Checkout GIT (Frontend)') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: 'main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [userRemoteConfig(url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Front.git')]])
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Front.git']])
             }
         }
 
@@ -110,7 +109,7 @@ pipeline {
         stage('Build Docker Image (Frontend)') {
             steps {
                 script {
-                def imageName = "nourhenechalghoumi/devops_project_frontend"
+                    def imageName = "nourhenechalghoumi/devops_project_frontend"
                     sh "docker build -t $imageName ."
                     sh "docker push $imageName"
                 }
