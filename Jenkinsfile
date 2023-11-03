@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh 'mvn clean install -DskipTests'
+                        sh 'mvn clean install '
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         error("Build failed: ${e.message}")
@@ -64,16 +64,16 @@ pipeline {
             }
         }
 
-        stage('Build Frontend') {
-            steps {
-                dir('DevOps_Project_Front') {
-                    script {
-                        sh 'npm install'
-                        sh 'ng build '
-                    }
-                }
-            }
-        }
+       // stage('Build Frontend') {
+           // steps {
+              //  dir('DevOps_Project_Front') {
+                   // script {
+                    //    sh 'npm install'
+                     //   sh 'ng build '
+                 //   }
+              //  }
+           // }
+       // }
 
         stage('SonarQube analysis') {
             steps {
