@@ -108,8 +108,8 @@ pipeline {
 
         stage('Build Docker Image (Frontend)') {
             steps {
-                def imageName = "nourhenechalghoumi/devops_project_frontend"
                 script {
+                def imageName = "nourhenechalghoumi/devops_project_frontend"
                     sh "docker build -t $imageName ."
                     sh "docker push $imageName"
                 }
