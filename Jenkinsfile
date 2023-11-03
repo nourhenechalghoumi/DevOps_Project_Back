@@ -23,22 +23,22 @@ pipeline {
             }
         }
 
-        stage('Build and Test Backend') {
+           stage('Build and Test Backend') {
             steps {
                 script {
                     try {
                         sh 'mvn clean install '
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
-                        error("Build failed (Backend): ${e.message}")
+                        error("Build failed: ${e.message}")
                     }
                 }
             }
             post {
                 success {
                     script {
-                        def subject = "Notification success (Backend)"
-                        def body = "BUILD DONE (Backend)"
+                        def subject = "Notification success"
+                        def body = "BUILD DONE "
                         def to = 'test.devops697@gmail.com'
 
                         mail(
@@ -50,7 +50,7 @@ pipeline {
                 }
                 failure {
                     script {
-                        def subject = "Build Failure - ${currentBuild.fullDisplayName} (Backend)"
+                        def subject = "Build Failure - ${currentBuild.fullDisplayName}"
                         def body = "The build has failed in the Jenkins pipeline. Please investigate and take appropriate action."
                         def to = 'test.devops697@gmail.com'
 
@@ -63,6 +63,7 @@ pipeline {
                 }
             }
         }
+
 
         stage('Checkout GIT (Frontend)') {
             steps {
