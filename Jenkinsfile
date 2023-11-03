@@ -13,7 +13,7 @@ pipeline {
         stage('Checkout GIT') {
             steps {
                 echo "Getting Project from Git"
-                checkout scm
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Back.git']]])
             }
         }
 
