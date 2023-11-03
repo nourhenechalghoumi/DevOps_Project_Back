@@ -73,7 +73,7 @@ pipeline {
       stage('Build Frontend') {
     steps {
         script {
-            dir('/home/devops/.git/DevOps_Project_Front') {
+            echo "Getting Project from Git (Frontend)"
                 sh 'npm install'
                 sh 'ng build'
             }
