@@ -75,12 +75,11 @@ pipeline {
     post {
         success {
             script {
-                def subject = "Notification success"
-                def body = "BUILD DONE"
-                def to = 'test.devops697@gmail.com' 
+                def subject = "Jenkins Build Notification - Success"
+                def body = "The Jenkins build for your project has completed successfully.\n\nBuild History:\n${BUILD_LOG}"
 
                 emailext (
-                    to: to,
+                    to: 'test.devops697@gmail.com',
                     subject: subject,
                     body: body,
                 )
@@ -88,12 +87,11 @@ pipeline {
         }
         failure {
             script {
-                def subject = "Build Failure - ${currentBuild.fullDisplayName}"
-                def body = "The build has failed in the Jenkins pipeline. Please investigate and take appropriate action."
-                def to = 'test.devops697@gmail.com' 
+                def subject = "Jenkins Build Notification - Failure"
+                def body = "The Jenkins build for your project has failed. Please investigate and take appropriate action.\n\nBuild History:\n${BUILD_LOG}"
 
                 emailext (
-                    to: to,
+                    to: 'test.devops697@gmail.com',
                     subject: subject,
                     body: body,
                 )
