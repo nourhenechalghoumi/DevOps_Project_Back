@@ -97,6 +97,13 @@ pipeline {
                 )
             }
         }
+        stage('Deploy Prometheus and Grafana') {
+            steps {
+                script {
+                        sh 'docker-compose -f docker-compose-perm-grafa.yml up -d'
+                    }
+                }
+            }
+        }
     }
-}
 
