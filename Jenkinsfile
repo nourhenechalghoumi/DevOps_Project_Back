@@ -46,11 +46,13 @@ pipeline {
             steps {
                 script {
                     echo "Getting Project from Git (Frontend)"
+                     dir('/home/devops/.git/DevOps_Project_Front') {
                     sh 'npm install'
                     sh 'ng build'
                 }
             }
         }
+     }
 
         stage('SonarQube analysis') {
             steps {
