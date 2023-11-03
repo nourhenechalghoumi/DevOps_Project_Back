@@ -100,7 +100,7 @@ pipeline {
 //	}
 
 
-        stage('Deploy Front/Back/DB') {
+        stage('Deploy Back/DB') {
             steps {
                 script {
                     sh 'docker-compose -f docker-compose.yml up -d'
