@@ -13,7 +13,7 @@ pipeline {
         stage('Checkout GIT (Backend)') {
             steps {
                 echo "Getting Project from Git (Backend)"
-                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Back.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Back.git']]])
             }
         }
 
@@ -35,23 +35,6 @@ pipeline {
                 }
             }
         }
-
-    //    stage('Checkout GIT (Frontend)') {
-      //      steps {
-        //        checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Front.git']]])
-//            }
-  //      }
-
-      //  stage('Build Frontend') {
-        //    steps {
-          //      script {
-            //        echo "Getting Project from Git (Frontend)"
-              //      sh 'npm install'
-                //    sh 'ng build'
-               // }
-           // }
-       // }
-     
 
         stage('SonarQube analysis') {
             steps {
@@ -79,26 +62,6 @@ pipeline {
                 }
             }
         }
-        
-
-        //stage('Build Docker Image (Frontend)') {
-          //  steps {
-            //    script {
-              //      def imageName = "nourhenechalghoumi/devops_project_frontend"
-                //    sh "docker build -t $imageName ."
-                  //  sh "docker push $imageName"
-               // }
-           // }
-       // }
-       // stage('Debug') {
-    	 //   steps {
-        //	script {
-          //  	    echo "Current PATH: ${env.PATH}"
-            //        sh "npm list -g --depth=0"
-        //	}
-    	  //  }
-//	}
-
 
         stage('Deploy Back/DB') {
             steps {
@@ -113,13 +76,13 @@ pipeline {
         success {
             script {
                 def subject = "Notification success"
-                def body = "BUILD DONE "
-                def to = 'test.devops697@gmail.com'
+                def body = "BUILD DONE"
+                def to = 'test.devops697@gmail.com' 
 
-                mail(
+                emailext (
+                    to: to,
                     subject: subject,
                     body: body,
-                    to: to,
                 )
             }
         }
@@ -127,12 +90,12 @@ pipeline {
             script {
                 def subject = "Build Failure - ${currentBuild.fullDisplayName}"
                 def body = "The build has failed in the Jenkins pipeline. Please investigate and take appropriate action."
-                def to = 'test.devops697@gmail.com'
+                def to = 'test.devops697@gmail.com' 
 
-                mail(
+                emailext (
+                    to: to,
                     subject: subject,
                     body: body,
-                    to: to,
                 )
             }
         }
