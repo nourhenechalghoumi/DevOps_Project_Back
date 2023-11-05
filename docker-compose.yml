@@ -1,17 +1,25 @@
 version: '3'
 services:
-  sonarqube:
-    image: sonarqube:latest
-    container_name: sonarqube
+  mysql:
+    image: mysql:latest
     ports:
-      - "9000:9000"
-    networks:
-      - sonarnet
+      - "3333:3306"
     environment:
-      - SONARQUBE_JDBC_URL=jdbc:mysql://sonarqube-db:3306/sonar?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance
-      - SONARQUBE_JDBC_USERNAME=sonar
-      - SONARQUBE_JDBC_PASSWORD=sonar
-networks:
-  sonarnet:
-    driver: bridge
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: devops
+    volumes:
+      - ./my-datavolume:/var/lib/mysql
+    restart: unless-stopped
+
+  backend:
+    image: backend/devops_project
+    ports:
+      - "8082:8082"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devops?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    restart: unless-stopped
 
