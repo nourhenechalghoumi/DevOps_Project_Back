@@ -74,7 +74,7 @@ pipeline {
         stage('Deploy Prometheus and Grafana') {
             steps {
                 script {
-                    sh 'docker-compose -f docker-compose-perm-grafa.yml up -d'
+                     sh 'docker-compose -f docker-compose-prometheus.yml -f docker-compose-grafana.yml up -d'
                 }
             }
         }
