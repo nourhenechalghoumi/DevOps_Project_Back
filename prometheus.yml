@@ -23,8 +23,7 @@ scrape_configs:
     - targets: ['192.168.122.129:9090']
     
   - job_name: 'jenkins'
-    Metrics-path: "/prometheus/"
+    metrics_path: "/prometheus/"  
     static_configs:
     - targets: ['192.168.122.129:8080']
-    
-    
+
