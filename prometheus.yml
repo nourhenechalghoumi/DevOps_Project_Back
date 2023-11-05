@@ -1,14 +1,14 @@
 global:
-  scrape_interval:     15s
+  scrape_interval: 15s
   evaluation_interval: 15s
-  scrape_timeout:      10s
+  scrape_timeout: 10s
 
 # Alertmanager configuration
 alerting:
   alertmanagers:
-  - static_configs:
-    - targets:
-      # - alertmanager:9093
+    - static_configs:
+      - targets:
+        # - alertmanager:9093
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
@@ -20,10 +20,13 @@ rule_files:
 scrape_configs:
   - job_name: 'prometheus'
     static_configs:
-    - targets: ['192.168.122.129:9090']
-    
+      - targets: ['localhost:9090']
+
   - job_name: 'jenkins'
-    metrics_path: "/prometheus/"  
+    metrics_path: "/prometheus/"
+    basic_auth:
+      username: admin
+      password: 1133dc5daff6ebf5c08f30f57211de23a6
     static_configs:
-    - targets: ['192.168.122.129:8080']
+      - targets: ['192.168.122.129:8080']
 
