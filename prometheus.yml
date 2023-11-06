@@ -29,10 +29,10 @@ scrape_configs:
       password: 1133dc5daff6ebf5c08f30f57211de23a6
     static_configs:
       - targets: ['192.168.122.132:8080']
-      
-   - job_name: 'springBoot'
+
+  - job_name: 'springBoot'
     metrics_path: /actuator/prometheus
     scrape_interval: 5s
     static_configs:
-    - targets: ['192.168.122.132:8082']
+      - targets: ['192.168.122.132:8082']
 
