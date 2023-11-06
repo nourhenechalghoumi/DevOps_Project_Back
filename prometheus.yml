@@ -28,5 +28,5 @@ scrape_configs:
       username: admin
       password: 1133dc5daff6ebf5c08f30f57211de23a6
     static_configs:
-      - targets: ['192.168.122.129:8080']
+      - targets: ['192.168.122.132:8080']
 
