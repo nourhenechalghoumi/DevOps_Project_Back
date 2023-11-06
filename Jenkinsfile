@@ -10,7 +10,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Backend') {
+        stage('Checkout  Repo_Backend') {
             steps {
                 echo "Checking out Backend from Git"
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nourhenechalghoumi/DevOps_Project_Back.git']]])
@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv(installationName: 'DevopsProject', serverUrl: 'http://192.168.122.132:9000') {
-                        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.login=squ_0566cf63b4357b26e174946bd06bf3ce609fd45c'
+                        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.login=squ_36dbaf405328144c99a4de171f2bd4c38c3feb2e'
                     }
                 }
             }
@@ -63,7 +63,7 @@ pipeline {
             }
         }
 
-        stage('Deploy Backend/DB') {
+        stage('Deploy DataBase') {
             steps {
                 script {
                     sh 'docker-compose -f docker-compose.yml up -d'
