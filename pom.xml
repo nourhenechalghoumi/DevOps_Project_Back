@@ -75,7 +75,13 @@
             <url>http://192.168.122.132:8081/repository/maven-releases/</url>
         </repository>
     </distributionManagement>
-
+    
+<!-- Specify the sonar.java.binaries property -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.7.0.1746</version>
+            </plugin>
     <build>
         <plugins>
             <plugin>
@@ -118,4 +124,5 @@
             </plugin>
         </plugins>
     </build>
+    
 </project>
