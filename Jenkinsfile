@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv(installationName: 'DevopsProject', serverUrl: 'http://192.168.122.132:9000') {
-                        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.login=squ_36dbaf405328144c99a4de171f2bd4c38c3feb2e'
+                        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.login=squ_93496de792eaeb87fe7feb3491878c3d1a3e9189'
                     }
                 }
             }
